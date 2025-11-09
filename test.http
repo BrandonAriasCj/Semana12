@@ -1,0 +1,166 @@
+### Variables
+@baseUrl = http://localhost:3000/api
+@authorId = REPLACE_WITH_REAL_ID
+@bookId = REPLACE_WITH_REAL_ID
+
+### ============================================
+### AUTORES
+### ============================================
+
+### Crear autor - Gabriel García Márquez
+POST {{baseUrl}}/authors
+Content-Type: application/json
+
+{
+  "name": "Gabriel García Márquez",
+  "email": "gabo@example.com",
+  "bio": "Escritor colombiano, premio Nobel de Literatura 1982",
+  "nationality": "Colombiano",
+  "birthYear": 1927
+}
+
+### Crear autor - Isabel Allende
+POST {{baseUrl}}/authors
+Content-Type: application/json
+
+{
+  "name": "Isabel Allende",
+  "email": "isabel@example.com",
+  "bio": "Escritora chilena",
+  "nationality": "Chilena",
+  "birthYear": 1942
+}
+
+### Crear autor - Jorge Luis Borges
+POST {{baseUrl}}/authors
+Content-Type: application/json
+
+{
+  "name": "Jorge Luis Borges",
+  "email": "borges@example.com",
+  "bio": "Escritor argentino, maestro del cuento corto",
+  "nationality": "Argentino",
+  "birthYear": 1899
+}
+
+### Crear autor - Julio Cortázar
+POST {{baseUrl}}/authors
+Content-Type: application/json
+
+{
+  "name": "Julio Cortázar",
+  "email": "cortazar@example.com",
+  "bio": "Escritor argentino, exponente del boom latinoamericano",
+  "nationality": "Argentino",
+  "birthYear": 1914
+}
+
+### Crear autor - Pablo Neruda
+POST {{baseUrl}}/authors
+Content-Type: application/json
+
+{
+  "name": "Pablo Neruda",
+  "email": "neruda@example.com",
+  "bio": "Poeta chileno, premio Nobel de Literatura 1971",
+  "nationality": "Chileno",
+  "birthYear": 1904
+}
+
+### Listar todos los autores
+GET {{baseUrl}}/authors
+
+### Obtener un autor específico
+GET {{baseUrl}}/authors/{{authorId}}
+
+### Actualizar un autor
+PUT {{baseUrl}}/authors/{{authorId}}
+Content-Type: application/json
+
+{
+  "name": "Gabriel García Márquez",
+  "bio": "Escritor colombiano, premio Nobel de Literatura 1982. Autor de Cien años de soledad."
+}
+
+### Eliminar un autor
+DELETE {{baseUrl}}/authors/{{authorId}}
+
+### Obtener libros de un autor
+GET {{baseUrl}}/authors/{{authorId}}/books
+
+### ============================================
+### LIBROS
+### ============================================
+
+### Crear libro - Cien años de soledad
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "Cien años de soledad",
+  "description": "Una obra maestra del realismo mágico que narra la historia de la familia Buendía",
+  "isbn": "978-0307474728",
+  "publishedYear": 1967,
+  "genre": "Realismo mágico",
+  "pages": 417,
+  "authorId": "{{authorId}}"
+}
+
+### Crear libro - La casa de los espíritus
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "La casa de los espíritus",
+  "description": "Primera novela de Isabel Allende",
+  "isbn": "978-1501117015",
+  "publishedYear": 1982,
+  "genre": "Ficción",
+  "pages": 448,
+  "authorId": "{{authorId}}"
+}
+
+### Listar todos los libros
+GET {{baseUrl}}/books
+
+### Obtener un libro específico
+GET {{baseUrl}}/books/{{bookId}}
+
+### Actualizar un libro
+PUT {{baseUrl}}/books/{{bookId}}
+Content-Type: application/json
+
+{
+  "title": "Cien años de soledad (Edición especial)",
+  "pages": 420
+}
+
+### Eliminar un libro
+DELETE {{baseUrl}}/books/{{bookId}}
+
+
+### ============================================
+### BÚSQUEDA Y FILTROS AVANZADOS
+### ============================================
+
+### Buscar libros con paginación
+GET {{baseUrl}}/books/search?search=amor&page=1&limit=10
+
+### Buscar libros por género
+GET {{baseUrl}}/books/search?genre=Novela&page=1&limit=10
+
+### Buscar libros por autor
+GET {{baseUrl}}/books/search?authorName=García&page=1&limit=10
+
+### Búsqueda completa con todos los filtros
+GET {{baseUrl}}/books/search?search=amor&genre=Novela&authorName=García&page=1&limit=10&sortBy=publishedYear&order=desc
+
+### Filtrar libros por género (endpoint simple)
+GET {{baseUrl}}/books?genre=Novela
+
+### ============================================
+### ESTADÍSTICAS DE AUTOR
+### ============================================
+
+### Obtener estadísticas de un autor
+GET {{baseUrl}}/authors/{{authorId}}/stats
